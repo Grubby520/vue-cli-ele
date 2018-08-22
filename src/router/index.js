@@ -1,16 +1,18 @@
 import App from '../App'
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
-Vue.use(Router)
+const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
 
-export default new Router({
-  routes: [
+export default [{
+  path: '/',
+  component: App, //顶层路由，index.html
+  hildren: [ // 二级路由，App.vue
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      component: home
     }
   ]
-})
+}]
